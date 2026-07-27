@@ -29,6 +29,7 @@ async def handle_start_button(message: Message):
 async def handle_start(message: Message):
     await register_user(message)
 
+
 async def register_user(message: Message):
     """регистрация пользователя и доступ к основному меню"""
     chat_id = message.chat.id
