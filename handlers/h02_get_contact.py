@@ -1,10 +1,12 @@
 from aiogram import Router, F
-from aiogram.types import Message, chat, ReplyKeyboardRemove
+from aiogram.types import Message
 
 from database.utils import db_update_user
+from database.utils import db_create_user_cart
 from keyboards.reply import get_main_menu
 
 router = Router()
+
 
 @router.message(F.contact)
 async def update_contact(message: Message):

@@ -2,6 +2,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from database.base import engine
 from database.models import (Users,Products,Carts,Orders,Categories,FinallyCarts)
+from sqlalchemy import update
 
 
 def get_session():
@@ -20,5 +21,23 @@ def db_register_user(full_name: str, chat_id: int):
     except IntegrityError:
         return True
 
+
 def db_update_user(chat_id: int, phone: str):
-    pass
+    """обновляем данные пользователя, получаем номер телефона"""
+
+    with get_session() as session:
+        query = update(Users).where(Users.telegram == chat_id).values(phone=phone)
+        session.execute(query)
+        session.commit()
+
+def db_create_user_cart(chat_id):
+    """"создание корзины пользователя после регистрации"""
+    try:
+        with get_session() as session:
+            subquery = session.scalar(select(Users).where(Users.telegram == chat_id))
+            query = Carts(user_id=subquery.id)
+            session.add(query)
+            session.commit()
+            return True
+    except IntegrityError:
+        return False

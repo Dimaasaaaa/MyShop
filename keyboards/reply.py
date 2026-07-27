@@ -12,4 +12,11 @@ def start_keyboard():
     )
 
 def get_main_menu():
-    pass
+    """создание основного меню сервиса"""
+    builder = ReplyKeyboardBuilder()
+    builder.button(text='Сделать заказ 🛎')
+    builder.button(text='История 📚')
+    builder.button(text='Корзина пользователя 🗑')
+    builder.button(text='Настройки ⚙')
+    builder.adjust(1,3)
+    return builder.as_markup(resize_keyboard=True)
