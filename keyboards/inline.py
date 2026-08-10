@@ -14,4 +14,4 @@ def create_categories_menu(chat_id):
     [builder.button(text=categories.category_name, callback_data = f"category_{category.id}")for category in categories]
 
     builder.adjust(2,1)
-    return builder
+    return builder.as_markup()
