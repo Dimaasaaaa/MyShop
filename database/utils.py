@@ -1,10 +1,8 @@
-from idlelib import query
-
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from database.base import engine
 from database.models import (Users, Products, Carts, Orders, Categories, FinallyCarts)
-from sqlalchemy import update
+from sqlalchemy import update, select, func, join
 
 
 def get_session():
@@ -50,7 +48,7 @@ def db_get_all_category():
     """получение всех категорий"""
     with get_session() as session:
         query = select(Categories)
-        return session.scalars(query).all
+        return session.scalars(query).all()
 
 
 def db_get_finally_price(chat_id):
@@ -76,3 +74,21 @@ def db_get_last_orders(chat_id, limit = 10):
             limit(limit)
         )
         return session.scalars(query).all()
+
+def db_get_products(category_id):
+    """Получение продуктов по id категории"""
+    with get_session() as session:
+        query = select(Products).where(Products.category_id == category_id)
+        return session.execute(query).all()
+
+def db_get_products_by_id(product_id):
+    """Получение продуктов по id категории"""
+    with get_session() as session:
+        query = select(Products).where(Products.id == product_id)
+        return session.execute(query)
+
+def db_get_user_cart(chat_id):
+    """Получение корзины пользователя по его ID"""
+    with get_session() as session:
+        query = select(Carts).join(Users).where(Users.telegram == chat_id)
+        return session.execute(query)

@@ -1,5 +1,5 @@
 from aiogram.types import KeyboardButton
-from aiogram.utils.keyboard import ReplyKeyboardMarkup
+from aiogram.utils.keyboard import ReplyKeyboardMarkup, ReplyKeyboardBuilder
 
 
 def start_keyboard():
@@ -11,7 +11,7 @@ def start_keyboard():
         resize_keyboard=True
     )
 def phone_button():
-    builder = ReplyKeyboardMarkup()
+    builder = ReplyKeyboardBuilder()
     builder.button(text="Предоставьте номер телефона", request_contact=True)
     return builder.as_markup(resize_keyboard=True)
 
@@ -28,5 +28,11 @@ def get_main_menu():
 def back_to_main_menu():
     """Возврат в главное меню"""
     builder = ReplyKeyboardBuilder()
-    builder.button(text="◀")
+    builder.button(text="Главное меню 🔙")
+    return builder.as_markup(resize_keyboard=True)
+
+def back_arrow_button():
+    """Кнопка назад"""
+    builder = ReplyKeyboardBuilder()
+    builder.button(text="Назад⏪")
     return builder.as_markup(resize_keyboard=True)

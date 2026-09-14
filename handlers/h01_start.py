@@ -3,7 +3,7 @@ from aiogram.types import Message, FSInputFile
 from aiogram.filters import CommandStart
 
 from database.utils import db_register_user
-from keyboards.reply import start_keyboard
+from keyboards.reply import start_keyboard, phone_button
 
 router = Router()
 
@@ -12,7 +12,7 @@ router = Router()
 async def command_start(message: Message):
     """обработка старта"""
 
-    photo = FSInputFile('media/hello.jpg')
+    photo = FSInputFile('media/welcome1.jpg')
     await message.answer_photo(
         photo=photo,
         caption=f'привет {message.from_user.full_name} для работы нажмите на кнопку',
