@@ -7,7 +7,7 @@ from .users import Users
 class Carts(Base):
     __tablename__ = 'carts'
     id: Mapped[int] = mapped_column(primary_key=True)
-    total_prize: Mapped[int] = mapped_column(DECIMAL(10, 2), default=0)
+    total_price: Mapped[int] = mapped_column(DECIMAL(10, 2), default=0)
     total_products: Mapped[int] = mapped_column(default=0)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), unique=True)
 

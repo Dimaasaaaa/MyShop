@@ -4,6 +4,7 @@ from aiogram.filters import CommandStart
 
 from database.utils import db_register_user
 from keyboards.reply import start_keyboard, phone_button
+from handlers.h02_get_contact import show_main_menu
 
 router = Router()
 

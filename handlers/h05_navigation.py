@@ -1,5 +1,5 @@
 from aiogram import Router, F, Bot
-from aiogram.types.message import Message
+from aiogram.types import Message
 from aiogram.exceptions import TelegramBadRequest
 from handlers.h03_order_handler import make_order
 

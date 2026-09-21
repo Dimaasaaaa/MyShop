@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.exceptions import TelegramBadRequest
-from aiogram.types import CallbackQuery, ReplyKeyboardMarkup
+from aiogram.types import CallbackQuery
 
 from keyboards.inline import create_categories_menu, show_product_by_category
 router = Router()
@@ -11,7 +11,7 @@ async def show_product(callback: CallbackQuery):
     """Показ всех продуктов из конкретной категории"""
     chat_id = callback.message.chat.id
     message_id = callback.message.message_id
-    category_id = callback.data.split("_")[-1]
+    category_id = int(callback.data.split("_")[-1])
 
     try:
         await callback.bot.edit_message_text(
@@ -23,7 +23,7 @@ async def show_product(callback: CallbackQuery):
         await callback.answer("Категория не найдена")
 
 
-@router.callback_query(F.data == "return_to_category")
+@router.callback_query(F.data == "from_detail_to_category")
 async def return_to_category(callback: CallbackQuery):
     """Возврат к списку категорий"""
     chat_id = callback.message.chat.id

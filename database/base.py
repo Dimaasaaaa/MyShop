@@ -30,6 +30,3 @@ engine = create_engine(DATABASE_URL, echo=True, future=True)
 
 class Base(DeclarativeBase):
     pass
-
-ENV_PATH = BASE_DIR / '.env'
-load_dotenv(dotenv_path=ENV_PATH)
