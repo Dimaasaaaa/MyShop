@@ -1,3 +1,5 @@
+from itertools import product
+
 from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from database.utils import db_get_all_category, db_get_finally_price, db_get_products

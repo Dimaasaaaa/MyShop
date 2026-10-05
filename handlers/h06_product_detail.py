@@ -54,3 +54,23 @@ async def ask_for_phone(chat_id: int, bot: Bot):
     """Запрос телефона при авторизации"""
     await bot.send_message(chat_id=chat_id,text="Предоставьте номер телефона для оформления заказа",
                            reply_markup=quantity_cart_controls())
+
+@router.callback_query(F.data == "from_detail_to_category")
+async def handle_back_to_category(callback: CallbackQuery, bot: Bot):
+    """Возвращаемся к списку всех категорий"""
+    chat_id = callback.message.chat.id
+    message_id = callback.message.message_id
+
+    try:
+        await bot.delete_message(chat_id, message_id)
+    except TelegramBadRequest:
+        pass
+
+    categories =db_get_all_category()
+    if not categories:
+        await bot.send_message(chat_id=chat_id, text="Категории отсутствуют")
+        return
+
+    keyboard = create_categories_menu(chat_id)
+    await bot.send_message(chat_id=chat_id, text="Выберите категории", reply_markup=keyboard)
+    await callback.answer()
