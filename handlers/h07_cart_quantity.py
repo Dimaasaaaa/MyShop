@@ -1,7 +1,7 @@
 from aiogram import Router, F, Bot
 from aiogram.exceptions import TelegramBadRequest
 from aiogram.types import CallbackQuery, FSInputFile, InlineKeyboardMarkup
-
+from database.utils import db_get_product_by_name
 
 router = Router()
 
@@ -13,4 +13,4 @@ async def change_product_quantity(callback: CallbackQuery, bot:Bot):
     action = callback.data.split()[-1]
 
     product_name = callback.data.split('\n')[0]
-    product = db.get_product_by_name(product_name)
+    product = db_get_product_by_name()

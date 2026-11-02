@@ -38,3 +38,14 @@ def quantity_cart_controls():
     builder.button(text="✅ В корзину", callback_data="add_to_cart")
     builder.adjust(3, 1)
     return builder.as_markup()
+
+def cart_actions_kb():
+    """Кнопка оформления, удаление и добавление товаров корзины"""
+    builder = InlineKeyboardBuilder()
+    builder.row(
+        InlineKeyboardButton(text="Оформить заказ", callback_data="confirm_order"),
+        InlineKeyboardButton(text="Убрать товар", callback_data="choose_to_remove"),
+        InlineKeyboardButton(text="Добавить товар", callback_data="choose_to_add")
+    )
+    builder.adjust(1,2)
+    return builder.as_markup()
