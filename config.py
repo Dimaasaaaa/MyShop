@@ -5,3 +5,4 @@ load_dotenv()
 
 TOKEN = getenv('TOKEN')
 
+ADMIN_ID = os.getenv('ADMIN_ID')
